@@ -1,0 +1,19 @@
+
+
+#jumbo {
+   padding-top: 30vh;
+   position: relative;
+}
+
+.jumbotron{
+    opacity: .9;
+    color: black;
+}
+
+#mePhoto {
+    position: absolute;
+    right: 0;
+    height: 200px;
+    width: auto;
+    
+}

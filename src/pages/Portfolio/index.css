@@ -1,0 +1,32 @@
+.projects{
+    padding-top: 5%;
+}
+
+.card-body{
+    color: white;
+}
+
+.cardImg {
+    height: 19rem;
+    width: auto;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.card {
+    width: 20rem;
+    border-color:darkslategray;
+    border-width: 5px;
+    border-radius: 15px;
+}
+
+.card-title{
+    text-align: center;
+    color: floralwhite;
+    font-weight: bold;
+}
+
+.card-text{
+    text-align: center;
+    color:  floralwhite;
+}
