@@ -34,7 +34,8 @@ function Contact() {
 
         axios({
             method: "POST",
-            url: "http://localhost:8080/mail/send",
+            // url: "http://localhost:8080/mail/send",
+            url: "https://bbelka-srvr.herokuapp.com/",
             data: {
                 name: name,
                 email: emailAddress,
