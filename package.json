@@ -1,6 +1,6 @@
 {
-  "homepage": "http://bbelka.github.io/reactPortfolio",
-  "name": "react-portfolio",
+  "homepage": "http://bbelka.github.io/",
+  "name": "portfolio",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
