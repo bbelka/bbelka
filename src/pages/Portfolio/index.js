@@ -18,8 +18,9 @@ function Portfolio() {
                             <h5 className="card-title">MGR</h5>
                             <p className="card-text">Allowing talent management to schedule, remind and include promotional copy regarding artist social media obligations, as well as a direct portal for artists to post.</p>
                             <div className="d-flex justify-content-around">
-                                <a href="https://bbelka.github.io/covidDistractions/" className="btn btn-light">deployed</a>
-                                <a href="https://github.com/bbelka/covidDistractions" className="btn btn-light">github</a>
+                                <a target="_blank" rel="noopener noreferrer" href=" https://mgr-talent.herokuapp.com/" className="btn btn-light">deployed</a>
+                                <a target="_blank" rel="noopener noreferrer" href="https://github.com/sali6798/mgr-react" className="btn btn-light">github</a>
+                                <a target="_blank" rel="noopener noreferrer" href="https://github.com/sali6798/mgr-api" className="btn btn-light">server</a>
                             </div>
                         </div>
                     </div>
@@ -33,8 +34,8 @@ function Portfolio() {
                             <p className="card-text">A full-stack quiz generation app, including private profiles, email
                             generation, and storage and retrieval of works in progress.</p>
                             <div className="d-flex justify-content-around">
-                                <a href="http://quizpanda.herokuapp.com/" className="btn btn-light">deployed</a>
-                                <a href="https://github.com/sali6798/quiz-panda" className="btn btn-light">github</a>
+                                <a target="_blank" rel="noopener noreferrer" href="http://quizpanda.herokuapp.com/" className="btn btn-light">deployed</a>
+                                <a target="_blank" rel="noopener noreferrer" href="https://github.com/sali6798/quiz-panda" className="btn btn-light">github</a>
                             </div>
                         </div>
                     </div>
@@ -50,8 +51,8 @@ function Portfolio() {
                             <p className="card-text">A fun little app designed to keep you conneted<br />...and disconnected...
                         </p>
                             <div className="d-flex justify-content-around">
-                                <a href="https://bbelka.github.io/covidDistractions/" className="btn btn-light">deployed</a>
-                                <a href="https://github.com/bbelka/covidDistractions" className="btn btn-light">github</a>
+                                <a target="_blank" rel="noopener noreferrer" href="https://bbelka.github.io/covidDistractions/" className="btn btn-light">deployed</a>
+                                <a target="_blank" rel="noopener noreferrer" href="https://github.com/bbelka/covidDistractions" className="btn btn-light">github</a>
                             </div>
                         </div>
                     </div>
@@ -65,8 +66,8 @@ function Portfolio() {
                             <p className="card-text">A search app, accessing the NYTimes API to produce your results related to
                             your desired topic</p>
                             <div className="d-flex justify-content-around">
-                                <a href="https://bbelka.github.io/NYTimesSearch/" className="btn btn-light">deployed</a>
-                                <a href="https://github.com/bbelka/NYTimesSearch" className="btn btn-light">github</a>
+                                <a target="_blank" rel="noopener noreferrer" href="https://bbelka.github.io/NYTimesSearch/" className="btn btn-light">deployed</a>
+                                <a target="_blank" rel="noopener noreferrer" href="https://github.com/bbelka/NYTimesSearch" className="btn btn-light">github</a>
                             </div>
                         </div>
                     </div>
@@ -82,8 +83,8 @@ function Portfolio() {
                             <p className="card-text">Accesses data from three different API's to provide pertinent weather
                             infomation for a desired location</p>
                             <div className="d-flex justify-content-around">
-                                <a href="https://bbelka.github.io/weatherDashboard/" className="btn btn-light">deployed</a>
-                                <a href="https://github.com/bbelka/weatherDashboard" className="btn btn-light">github</a>
+                                <a target="_blank" rel="noopener noreferrer" href="https://bbelka.github.io/weatherDashboard/" className="btn btn-light">deployed</a>
+                                <a target="_blank" rel="noopener noreferrer" href="https://github.com/bbelka/weatherDashboard" className="btn btn-light">github</a>
                             </div>
                         </div>
                     </div>
@@ -97,8 +98,8 @@ function Portfolio() {
                             <p className="card-text">A search app, accessing the NYTimes API to produce your results related to
                             your desired topic</p>
                             <div className="d-flex justify-content-around">
-                                <a href="https://bbelka.github.io/NYTimesSearch/" className="btn btn-light">deployed</a>
-                                <a href="https://github.com/bbelka/NYTimesSearch" className="btn btn-light">github</a>
+                                <a target="_blank" rel="noopener noreferrer"href="https://bbelka.github.io/NYTimesSearch/" className="btn btn-light">deployed</a>
+                                <a target="_blank" rel="noopener noreferrer"href="https://github.com/bbelka/NYTimesSearch" className="btn btn-light">github</a>
                             </div>
                         </div>
                     </div>
