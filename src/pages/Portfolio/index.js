@@ -7,6 +7,7 @@ import NYT from '../../utils/images/NYT.png';
 import MGR from '../../utils/images/MGR.png';
 
 function Portfolio() {
+    //html layout
     return (
         <div className="container ">
             <div className="row">
