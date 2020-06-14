@@ -4,7 +4,7 @@
 
 
 ## Description
-This is my portfolio. I uses React.js for dynamic front-end content generation and Bootstrap for the framework. There is also a seperate repo that holds the server for email generation: bbelka-srvr.
+This is my portfolio. I used React.js for dynamic front-end content generation and Bootstrap for the framework. There is also a seperate repo that holds the server for email generation: bbelka-srvr.
 
 ## Table of Contents
 1. [Installation](#installation)
