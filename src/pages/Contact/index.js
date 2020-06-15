@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import './index.css';
 import axios from 'axios';
 import linkedIn from '../../utils/images/linkedin64.png';
