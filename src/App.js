@@ -7,6 +7,8 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 // import { isCompositeComponent } from 'react-dom/test-utils';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function App() {
   return (
