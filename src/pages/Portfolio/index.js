@@ -1,18 +1,31 @@
 import React, { useState, setState, useEffect } from 'react';
-import { Container, Row, Card, Button } from 'react-bootstrap';
+import { Modal, Container, Row, Card, Button } from 'react-bootstrap';
 import './index.css';
-import SocialDist from '../../utils/images/SocialDistance2.png';
-import QuizPanda from '../../utils/images/quizPanda.png';
-import WeatherDash from '../../utils/images/WeatherDash.png';
-import NYT from '../../utils/images/NYT.png';
-import MGR from '../../utils/images/MGR.png';
+// import SocialDist from '../../utils/images/SocialDistance2.png';
+// import QuizPanda from '../../utils/images/quizPanda.png';
+// import WeatherDash from '../../utils/images/WeatherDash.png';
+// import NYT from '../../utils/images/NYT.png';
+// import MGR from '../../utils/images/MGR.png';
 import API from '../../utils/API';
-import InfoModal from '../../components/InfoModal'
 
 function Portfolio() {
 
     const [projects, setProjects] = useState([]);
+    const [modalProject, setModalProject] = useState({})
     const [id, setId] = useState()
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+
+    const handleShow = (id) => {
+        API.getProjectById(id)
+            .then(({ data }) => {
+                console.log(data);
+                setModalProject(data)
+                setShow(true);
+            })
+            .catch(err => console.log(err));
+    }
 
     useEffect(() => {
         API.getProjects()
@@ -25,33 +38,62 @@ function Portfolio() {
 
     //html layout
     return (
-
-        <Container>
-            <Row>
-                {projects.map((project) =>
-                    <div className="col-md-6 d-flex justify-content-center projects" key={project._id}>
-                        <Card
-                            bg="dark"
-                            text="white">
-                            <Card.Img variant="top" src={project.mainImage} />
-                            <Card.Body>
-                                <Card.Title>{project.name}</Card.Title>
-                                <Card.Text>{project.description}</Card.Text>
-                                <div className="d-flex justify-content-around">
-                                    <Button
-                                        variant="light"
-                                        text="dark"
-                                        target="_blank"
-                                        href="https.//mgr.talent.herokuapp.com">
-                                        deployed
+        <>
+            <Modal
+                show={show}
+                onHide={handleClose}
+                backdrop="static"
+                keyboard={false}
+                bg="dark"
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>{modalProject.name}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <p>Technical description:{modalProject.technical}</p>
+                    <p>Contribution:{modalProject.contribution}</p>
+                    <p>Technologies:{modalProject.technologies}</p>
+                </Modal.Body>
+                {/* <Modal.Footer>
+                    {modalProject.urls.map((url) => 
+                        <Button
+                            variant="light"
+                            text="dark"
+                            target="_blank"
+                            href={url[1]}
+                        >
+                            {url[0]}
+                        </Button>
+                    )}
+                </Modal.Footer> */}
+            </Modal>
+            <Container>
+                <Row>
+                    {projects.map((project) =>
+                        <div className="col-md-6 d-flex justify-content-center projects" key={project._id}>
+                            <Card
+                                bg="dark"
+                                text="white">
+                                <Card.Img variant="top" src={project.mainImage} />
+                                <Card.Body>
+                                    <Card.Title>{project.name}</Card.Title>
+                                    <Card.Text>{project.description}</Card.Text>
+                                    <div className="d-flex justify-content-around">
+                                        <Button
+                                            variant="light"
+                                            text="dark"
+                                            target="_blank"
+                                            onClick={() => handleShow(project._id)}
+                                        >
+                                            more info
                                 </Button>
-                                </div>
-                            </Card.Body>
-                        </Card>
-                    </div>)}
-            </Row>
-        </Container >
-
+                                    </div>
+                                </Card.Body>
+                            </Card>
+                        </div>)}
+                </Row>
+            </Container >
+        </>
         // <div className="container ">
         //     <div className="row">
         //         <div className="col-md-6 d-flex justify-content-center projects">

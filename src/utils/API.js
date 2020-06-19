@@ -9,5 +9,8 @@ export default {
     },
     getProjects: function () {
         return axios.get(BASE_URL + "/api/project")
+    },
+    getProjectById: function (id) {
+        return axios.get(BASE_URL + "/api/project/" + id)
     }
 }
