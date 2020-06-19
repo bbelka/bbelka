@@ -8,6 +8,7 @@ import Contact from './pages/Contact';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 // import { isCompositeComponent } from 'react-dom/test-utils';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import AddProject from './pages/AddProject';
 
 
 function App() {
@@ -20,6 +21,8 @@ function App() {
           <Route exact path={"/portfolio"} component={Portfolio} />
           <Route exact path={"/about"} component={About} />
           <Route exact path={"/contact"} component={Contact} />
+          <Route exact path={"/add"} component={AddProject} />
+
         </Switch>
         {/* <Route exact path ="/" component={HomePage}/> */}
       </div>
