@@ -54,18 +54,18 @@ function Portfolio() {
                     <p>Contribution:{modalProject.contribution}</p>
                     <p>Technologies:{modalProject.technologies}</p>
                 </Modal.Body>
-                {/* <Modal.Footer>
+                <Modal.Footer>
                     {modalProject.urls.map((url) => 
                         <Button
                             variant="light"
                             text="dark"
                             target="_blank"
-                            href={url[1]}
+                            href={url.url}
                         >
-                            {url[0]}
+                            {url.name}
                         </Button>
                     )}
-                </Modal.Footer> */}
+                </Modal.Footer>
             </Modal>
             <Container>
                 <Row>
