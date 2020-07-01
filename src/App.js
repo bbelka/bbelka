@@ -5,8 +5,8 @@ import Jumbotron from './components/Jumbotron';
 import Portfolio from "./pages/Portfolio";
 import About from './pages/About';
 import Contact from './pages/Contact';
+import Login from './pages/Login'
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-// import { isCompositeComponent } from 'react-dom/test-utils';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AddProject from './pages/AddProject';
 
@@ -22,9 +22,8 @@ function App() {
           <Route exact path={"/about"} component={About} />
           <Route exact path={"/contact"} component={Contact} />
           <Route exact path={"/add"} component={AddProject} />
-
+          <Route exact path={"/login"} component={Login} />
         </Switch>
-        {/* <Route exact path ="/" component={HomePage}/> */}
       </div>
     </BrowserRouter>
   );
