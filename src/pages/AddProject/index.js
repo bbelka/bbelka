@@ -1,25 +1,53 @@
-import React, { useState, setState, useEffect } from 'react';
-import { Form, Container, Row, Card, Button, ListGroup } from 'react-bootstrap';
-
+import React, { useState } from 'react';
+import { Form, Container, Row, Col, Card, Button } from 'react-bootstrap';
 import API from "../../utils/API";
-import cloudUploadIcon from "../../utils/images/cloudUpload64.png"
 
 
 function AddProject() {
 
-    const [name, setName] = useState();
-    const [description, setDescription] = useState();
-    const [technical, setTechnical] = useState();
-    const [contribution, setContribution] = useState();
-    const [technologies, setTechnologies] = useState();
-    const [mainImage, setMainImage] = useState();
-    const [uploads, setUploads] = useState([]);
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
+    const [technical, setTechnical] = useState('');
+    const [contribution, setContribution] = useState('');
+    const [technologies, setTechnologies] = useState('');
+    const [deployed, setDeployed] = useState({});
+    const [github, setGithub] = useState({});
+    const [server, setServer] = useState({});
     const [imgPath, setImgPath] = useState({});
-    const [savedUploads, setSavedUploads] = useState([]);
+
+    const handleInputChange = e => {
+        const { name, value } = e.target;
+        if (name === "name") {
+            setName(value);
+        }
+        else if (name === "description") {
+            setDescription(value);
+        }
+        else if (name === "technical") {
+            setTechnical(value);
+        }
+        else if (name === "contribution") {
+            setContribution(value);
+        }
+        else if (name === "technologies") {
+            setTechnologies(value);
+        }
+        // else if (name === "mainImage") {
+        //     setMainImage(value);
+        // }
+        else if (name === "deployed") {
+            setDeployed(value);
+        }
+        else if (name === "github") {
+            setGithub(value);
+        }
+        else if (name === "server") {
+            setServer(value);
+        }
+    }
 
 
     const uploadIMG = async () => {
-
         console.log(imgPath)
         // make object
         if (!isEmpty(imgPath)) {
@@ -36,12 +64,8 @@ function AddProject() {
                 }
             );
             const file = await res.json();           // URL Link to picture
-            // console.log(file)
-            setUploads(uploads.concat({
-                id: imgPath.name + uploads.length,
-                name: imgPath.name,
-                url: file.url
-            }))
+            // setMainImage(file.url);
+            return file.url
         }
     }
 
@@ -55,97 +79,117 @@ function AddProject() {
         return true;
     }
 
-    const displayUploads = () => {
-        if (savedUploads.length > 0) {
-            return savedUploads.map((upload, index) => <ListGroup.Item key={upload} name={upload} type="link" index={index} handleDelete={handleDelete} />)
-        }
-
-        return uploads.map(upload => <ListGroup.Item key={upload.id} {...upload} handleDelete={handleDelete} />)
-    }
-
-    const handleDelete = (...props) => {
-        if (props.length > 1) {
-            const newUploads = savedUploads.filter(upload => upload !== props[0]);
-            setSavedUploads(newUploads);
-        }
-        else {
-            const newUploads = uploads.filter(upload => upload.id !== props[0]);
-            setUploads(newUploads);
-        }
-    }
-
-
-    const handleSubmit = event => {
+    const handleSubmit = async (event) => {
+        event.persist();
         event.preventDefault();
+        const image = await uploadIMG()
         const newProject = {
             name: name,
             description: description,
-            technical:technical,
-            contribution:contribution,
-            technologies:technologies,
-            mainImage:mainImage
-            // urls
+            technical: technical,
+            contribution: contribution,
+            technologies: technologies,
+            mainImage: image
         }
+
+        const Urls = []
+        if (deployed) {
+            Urls.push({ name: "deployed", url: deployed })
+        } if (github) {
+            Urls.push({ name: "github", url: github })
+        } if (server) {
+            Urls.push({ name: "server", url: server })
+        }
+
+        API.createProject(newProject)
+            .then(({ data }) => {
+                console.log("create")
+                console.log(data);
+                Urls.map((url) => {
+                    const newUrl = {
+                        projectId: data._id,
+                        name: url.name,
+                        url: url.url
+                    }
+                    return API.createUrl(newUrl)
+                })
+            })
+            .catch(err => console.log(err))
+
+
     }
 
     return (
         <Container>
-            <Card
-                bg="dark"
-                text="white">
-                <Form>
-                    <Form.Group controlId="projectName">
-                        <Form.Label>Project Name</Form.Label>
-                        <Form.Control type="text" placeholder="Project Name" onChange={setName} />
-                    </Form.Group>
+            <Row>
+                <Col>
+                    <div className="projects">
+                        <Card
+                            bg="dark"
+                            text="white"
+                            variant="add">
+                            <Form
+                                onSubmit={handleSubmit}
+                            >
+                                <Row>
+                                    <Col>
+                                        <Form.Group controlId="projectName">
+                                            <Form.Label>Project Name</Form.Label>
+                                            <Form.Control type="text" placeholder="Project Name" name="name" onChange={handleInputChange} />
+                                        </Form.Group>
 
-                    <Form.Group controlId="projectGeneralDescription">
-                        <Form.Label>General Description</Form.Label>
-                        <Form.Control as="textarea" rows="3" placeholder="General Description" onChange={setDescription} />
-                    </Form.Group>
+                                        <Form.Group controlId="projectGeneralDescription">
+                                            <Form.Label>General Description</Form.Label>
+                                            <Form.Control as="textarea" rows="3" placeholder="General Description" name="description" onChange={handleInputChange} />
+                                        </Form.Group>
 
-                    <Form.Group controlId="projectTechnicalDescription">
-                        <Form.Label>Technical Description</Form.Label>
-                        <Form.Control as="textarea" rows="3" placeholder="Technical Description" onChange={setTechnical} />
-                    </Form.Group>
+                                        <Form.Group controlId="projectTechnicalDescription">
+                                            <Form.Label>Technical Description</Form.Label>
+                                            <Form.Control as="textarea" rows="3" placeholder="Technical Description" name="technical" onChange={handleInputChange} />
+                                        </Form.Group>
 
-                    <Form.Group controlId="projectContribution">
-                        <Form.Label>Contribution</Form.Label>
-                        <Form.Control as="textarea" rows="3" placeholder="Contribution" onChange={setContribution} />
-                    </Form.Group>
+                                        <Form.Group controlId="projectContribution">
+                                            <Form.Label>Contribution</Form.Label>
+                                            <Form.Control as="textarea" rows="3" placeholder="Contribution" name="contribution" onChange={handleInputChange} />
+                                        </Form.Group>
 
-                    <Form.Group controlId="projectTechnologies">
-                        <Form.Label>Technologies</Form.Label>
-                        <Form.Control as="textarea" rows="3" placeholder="Technologies" onChange={setTechnologies} />
-                    </Form.Group>
+                                        <Form.Group controlId="projectTechnologies">
+                                            <Form.Label>Technologies</Form.Label>
+                                            <Form.Control as="textarea" rows="3" placeholder="Technologies" name="technologies" onChange={handleInputChange} />
+                                        </Form.Group>
+                                    </Col>
+                                    <Col>
 
-                    <Form.Group controlId="projectMainImage">
-                        <Form.Label>Main Image Address</Form.Label>
-                        <Form.Control type="text" placeholder="Main Image Address" onChange={setMainImage} />
-                    </Form.Group>
+                                        <Form.Group controlId="projectDeployed">
+                                            <Form.Label>Deployed site url</Form.Label>
+                                            <Form.Control type="text" placeholder="Deployed Site Address" name="deployed" onChange={handleInputChange} />
+                                        </Form.Group>
 
-                    <Form.Group container alignItems="center" justify="center">
-                        <input type="file" id="uploadImg" name="uploadImg" onChange={selectFile} />
-                        <Button
-                            variant="light"
-                            color="primary"
-                            startIcon={cloudUploadIcon}
-                            onClick={uploadIMG}
-                        >
-                            Upload
-                    </Button>
-                    </Form.Group>
+                                        <Form.Group controlId="projectGithub">
+                                            <Form.Label>Github repository</Form.Label>
+                                            <Form.Control type="text" placeholder="Github Repository Address" name="github" onChange={handleInputChange} />
+                                        </Form.Group>
 
-                    {uploads.length > 0 || savedUploads.length > 0
-                        ? <ListGroup><ListGroup.Item>{displayUploads()}</ListGroup.Item></ListGroup>
-                        : ""
-                    }
+                                        <Form.Group controlId="projectServer">
+                                            <Form.Label>Server Github Repository</Form.Label>
+                                            <Form.Control type="text" placeholder="Server Github Repository Address" name="server" onChange={handleInputChange} />
+                                        </Form.Group>
 
-                    <Button variant="primary" type="submit" onClick={handleSubmit}>
-                        Submit
+                                        <Form.Group container="true" alignitems="center" justify="center">
+                                            <Form.Label>Upload a Screenshot </Form.Label>
+                                            <input type="file" id="uploadImg" name="uploadImg" onChange={selectFile} />
+                                        </Form.Group>
+
+                                        <Button variant="primary" type="submit">
+                                            Submit
                 </Button>
-                </Form>
-            </Card>
+                                    </Col>
+                                </Row>
+                            </Form>
+                        </Card>
+                    </div>
+                </Col>
+            </Row>
         </Container>
     )
 }

@@ -4,13 +4,19 @@ const BASE_URL = 'http://localhost:8080'
 
 
 export default {
-    mail: function (email) {
+    mail: (email) => {
         return axios.post(BASE_URL + "/mail/send", email)
     },
-    getProjects: function () {
+    getProjects: () => {
         return axios.get(BASE_URL + "/api/project")
     },
-    getProjectById: function (id) {
+    getProjectById: (id) => {
         return axios.get(BASE_URL + "/api/project/" + id)
+    },
+    createProject: (project) => {
+        return axios.post(BASE_URL + "/api/project", project)
+    },
+    createUrl: (url) => {
+        return axios.post(BASE_URL + "/api/url", url)
     }
 }
