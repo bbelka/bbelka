@@ -1,13 +1,13 @@
 import React from "react";
+import { Container, Row, Col } from 'react-bootstrap'
 import './index.css';
 
 function About() {
     return (
-        <div className="container">
-            <div className="container">
-                <div className="row" id="aboutRow">
-
-                    <div className="col-md-3"></div>
+        <Container>
+            <Container>
+                <Row id="aboutRow">
+                    <Col md={3}></Col>
                     <div className="col-md-6 bg-dark" id="aboutDiv">
                         <h4>I'm Brett.</h4>
                         <p>I am a full-stack web developer, currently located in Seattle, WA. I have a passion for design -
@@ -26,11 +26,11 @@ function About() {
                         houses, rebuilding engines, and generally troubleshooting just about any problem that arises.
                     </p>
                     </div>
-                    <div className="col-md-3"></div>
+                    <Col md={3}></Col>
+                </Row>
+            </Container>
+        </Container>
 
-                </div>
-            </div>
-        </div>
     )
 }
 
