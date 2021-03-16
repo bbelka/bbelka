@@ -1,9 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from "react-router-dom";
 import { Form, Container, Row, Col, Card, Button } from 'react-bootstrap';
 import API from "../../utils/API";
+import Login from "../Login";
+
+
 
 
 function AddProject() {
+
+    const history = useHistory();
 
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
@@ -14,6 +20,9 @@ function AddProject() {
     const [github, setGithub] = useState({});
     const [server, setServer] = useState({});
     const [imgPath, setImgPath] = useState({});
+    const [loggedIn, setLoggedIn] = useState(false);
+
+
 
     const handleInputChange = e => {
         const { name, value } = e.target;
@@ -45,6 +54,25 @@ function AddProject() {
             setServer(value);
         }
     }
+
+    useEffect(() => {
+        async function init() {
+            try {
+                const { data: user } = await API.readSessions();
+                if (user) {
+                    console.log(user);
+                    setLoggedIn(true)
+                } else {
+                    console.log("no user");
+                    history.push("/login");
+                }
+            } catch (err) {
+                console.log(err);
+                throw err;
+            }
+        }
+        init();
+    })
 
 
     const uploadIMG = async () => {
@@ -118,80 +146,83 @@ function AddProject() {
 
 
     }
+    const renderAddProject = () => {
+        return (
+            <Container>
+                <Row>
+                    <Col>
+                        <div className="projects">
+                            <Card
+                                bg="dark"
+                                text="white"
+                                variant="add">
+                                <Form
+                                    onSubmit={handleSubmit}
+                                >
+                                    <Row>
+                                        <Col>
+                                            <Form.Group controlId="projectName">
+                                                <Form.Label>Project Name</Form.Label>
+                                                <Form.Control type="text" placeholder="Project Name" name="name" onChange={handleInputChange} />
+                                            </Form.Group>
 
-    return (
-        <Container>
-            <Row>
-                <Col>
-                    <div className="projects">
-                        <Card
-                            bg="dark"
-                            text="white"
-                            variant="add">
-                            <Form
-                                onSubmit={handleSubmit}
-                            >
-                                <Row>
-                                    <Col>
-                                        <Form.Group controlId="projectName">
-                                            <Form.Label>Project Name</Form.Label>
-                                            <Form.Control type="text" placeholder="Project Name" name="name" onChange={handleInputChange} />
-                                        </Form.Group>
+                                            <Form.Group controlId="projectGeneralDescription">
+                                                <Form.Label>General Description</Form.Label>
+                                                <Form.Control as="textarea" rows="3" placeholder="General Description" name="description" onChange={handleInputChange} />
+                                            </Form.Group>
 
-                                        <Form.Group controlId="projectGeneralDescription">
-                                            <Form.Label>General Description</Form.Label>
-                                            <Form.Control as="textarea" rows="3" placeholder="General Description" name="description" onChange={handleInputChange} />
-                                        </Form.Group>
+                                            <Form.Group controlId="projectTechnicalDescription">
+                                                <Form.Label>Technical Description</Form.Label>
+                                                <Form.Control as="textarea" rows="3" placeholder="Technical Description" name="technical" onChange={handleInputChange} />
+                                            </Form.Group>
 
-                                        <Form.Group controlId="projectTechnicalDescription">
-                                            <Form.Label>Technical Description</Form.Label>
-                                            <Form.Control as="textarea" rows="3" placeholder="Technical Description" name="technical" onChange={handleInputChange} />
-                                        </Form.Group>
+                                            <Form.Group controlId="projectContribution">
+                                                <Form.Label>Contribution</Form.Label>
+                                                <Form.Control as="textarea" rows="3" placeholder="Contribution" name="contribution" onChange={handleInputChange} />
+                                            </Form.Group>
 
-                                        <Form.Group controlId="projectContribution">
-                                            <Form.Label>Contribution</Form.Label>
-                                            <Form.Control as="textarea" rows="3" placeholder="Contribution" name="contribution" onChange={handleInputChange} />
-                                        </Form.Group>
+                                            <Form.Group controlId="projectTechnologies">
+                                                <Form.Label>Technologies</Form.Label>
+                                                <Form.Control as="textarea" rows="3" placeholder="Technologies" name="technologies" onChange={handleInputChange} />
+                                            </Form.Group>
+                                        </Col>
+                                        <Col>
 
-                                        <Form.Group controlId="projectTechnologies">
-                                            <Form.Label>Technologies</Form.Label>
-                                            <Form.Control as="textarea" rows="3" placeholder="Technologies" name="technologies" onChange={handleInputChange} />
-                                        </Form.Group>
-                                    </Col>
-                                    <Col>
+                                            <Form.Group controlId="projectDeployed">
+                                                <Form.Label>Deployed site url</Form.Label>
+                                                <Form.Control type="text" placeholder="Deployed Site Address" name="deployed" onChange={handleInputChange} />
+                                            </Form.Group>
 
-                                        <Form.Group controlId="projectDeployed">
-                                            <Form.Label>Deployed site url</Form.Label>
-                                            <Form.Control type="text" placeholder="Deployed Site Address" name="deployed" onChange={handleInputChange} />
-                                        </Form.Group>
+                                            <Form.Group controlId="projectGithub">
+                                                <Form.Label>Github repository</Form.Label>
+                                                <Form.Control type="text" placeholder="Github Repository Address" name="github" onChange={handleInputChange} />
+                                            </Form.Group>
 
-                                        <Form.Group controlId="projectGithub">
-                                            <Form.Label>Github repository</Form.Label>
-                                            <Form.Control type="text" placeholder="Github Repository Address" name="github" onChange={handleInputChange} />
-                                        </Form.Group>
+                                            <Form.Group controlId="projectServer">
+                                                <Form.Label>Server Github Repository</Form.Label>
+                                                <Form.Control type="text" placeholder="Server Github Repository Address" name="server" onChange={handleInputChange} />
+                                            </Form.Group>
 
-                                        <Form.Group controlId="projectServer">
-                                            <Form.Label>Server Github Repository</Form.Label>
-                                            <Form.Control type="text" placeholder="Server Github Repository Address" name="server" onChange={handleInputChange} />
-                                        </Form.Group>
+                                            <Form.Group container="true" alignitems="center" justify="center">
+                                                <Form.Label>Upload a Screenshot </Form.Label>
+                                                <input type="file" id="uploadImg" name="uploadImg" onChange={selectFile} />
+                                            </Form.Group>
 
-                                        <Form.Group container="true" alignitems="center" justify="center">
-                                            <Form.Label>Upload a Screenshot </Form.Label>
-                                            <input type="file" id="uploadImg" name="uploadImg" onChange={selectFile} />
-                                        </Form.Group>
+                                            <Button variant="primary" type="submit">
+                                                Submit
+                                            </Button>
+                                        </Col>
+                                    </Row>
+                                </Form>
+                            </Card>
+                        </div>
+                    </Col>
+                </Row>
+            </Container>
+        )
+    }
+    return <div className="Dashboard">{loggedIn ? renderAddProject() : <Login />}</div>
 
-                                        <Button variant="primary" type="submit">
-                                            Submit
-                </Button>
-                                    </Col>
-                                </Row>
-                            </Form>
-                        </Card>
-                    </div>
-                </Col>
-            </Row>
-        </Container>
-    )
 }
 
 export default AddProject;
