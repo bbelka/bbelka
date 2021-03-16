@@ -5,7 +5,9 @@ import './index.css';
 import linkedIn from '../../utils/images/linkedin64.png';
 import gitHub from '../../utils/images/github64-1.png';
 import email from '../../utils/images/email64.png';
-import ContactForm from '../../components/ContactForm'
+import ContactForm from '../../components/ContactForm';
+import ContactModal from '../../components/ContactModal'
+
 
 
 function Contact() {
@@ -15,6 +17,9 @@ function Contact() {
     const [lastName, setLastName] = useState("");
     const [emailAddress, setEmailAddress] = useState("");
     const [messageText, setMessageText] = useState("");
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
 
     //set state based upon current value in form
     const handleInputChange = event => {
@@ -59,7 +64,8 @@ function Contact() {
             if (response.status === 200) {
                 console.log('success');
                 resetForm();
-                return alert("MESSAGE SENT");
+                return setShow(true);
+
 
                 //if fail, alert message failed to send
             } else {
@@ -80,6 +86,7 @@ function Contact() {
     //html layout
     return (
         <>
+            <ContactModal show={show} handleClose={handleClose} />
             <ContactForm handleInputChange={handleInputChange} handleSubmit={handleSubmit} />
             <Container className="contact" id="link">
 
