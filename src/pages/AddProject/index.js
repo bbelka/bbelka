@@ -55,26 +55,6 @@ function AddProject() {
         }
     }
 
-<<<<<<< HEAD
-    // useEffect(() => {
-    //     async function init() {
-    //         try {
-    //             const { data: user } = await API.readSessions();
-    //             if (user) {
-    //                 console.log(user);
-    //                 setLoggedIn(true)
-    //             } else {
-    //                 console.log("no user");
-    //                 history.push("/login");
-    //             }
-    //         } catch (err) {
-    //             console.log(err);
-    //             throw err;
-    //         }
-    //     }
-    //     init();
-    // })
-=======
     useEffect(() => {
         async function init() {
             try {
@@ -93,7 +73,6 @@ function AddProject() {
         }
         init();
     })
->>>>>>> development
 
 
     const uploadIMG = async () => {
