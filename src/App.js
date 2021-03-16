@@ -6,6 +6,7 @@ import Portfolio from "./pages/Portfolio";
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Login from './pages/Login'
+import addUser from './pages/AddUser'
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AddProject from './pages/AddProject';
@@ -23,6 +24,7 @@ function App() {
           <Route exact path={"/contact"} component={Contact} />
           <Route exact path={"/add"} component={AddProject} />
           <Route exact path={"/login"} component={Login} />
+          <Route exact path={"/addUser"} component={addUser} />
         </Switch>
       </div>
     </BrowserRouter>

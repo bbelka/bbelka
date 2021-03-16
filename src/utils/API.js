@@ -19,14 +19,16 @@ export default {
     createUrl: (url) => {
         return axios.post(BASE_URL + "/api/url", url)
     },
-    login: function (userData) {
+    login: (userData) => {
         return axios.post(BASE_URL + "/auth/login", userData, { withCredentials: true })
     },
-    logout: function () {
+    logout: () => {
         return axios.get(BASE_URL + "/auth/logout", { withCredentials: true })
     },
     readSessions: function () {
-        // return axios.get(BASE_URL + "/readsessions", { withCredentials: true })
         return axios.get(BASE_URL + "/readsessions", { withCredentials: true })
+    },
+    createUser: (userData) => {
+        return axios.post(BASE_URL + "/api/user", userData, { withCredentials: true })
     }
 }
