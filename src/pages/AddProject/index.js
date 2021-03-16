@@ -55,6 +55,7 @@ function AddProject() {
         }
     }
 
+<<<<<<< HEAD
     // useEffect(() => {
     //     async function init() {
     //         try {
@@ -73,6 +74,26 @@ function AddProject() {
     //     }
     //     init();
     // })
+=======
+    useEffect(() => {
+        async function init() {
+            try {
+                const user = await API.readSessions();
+                if (user) {
+                    console.log(user);
+                    setLoggedIn(true)
+                } else {
+                    console.log("no user");
+                    history.push("/login");
+                }
+            } catch (err) {
+                console.log(err);
+                throw err;
+            }
+        }
+        init();
+    })
+>>>>>>> development
 
 
     const uploadIMG = async () => {
