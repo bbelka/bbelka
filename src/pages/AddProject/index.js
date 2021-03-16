@@ -58,7 +58,7 @@ function AddProject() {
     useEffect(() => {
         async function init() {
             try {
-                const { data: user } = await API.readSessions();
+                const user = await API.readSessions();
                 if (user) {
                     console.log(user);
                     setLoggedIn(true)
