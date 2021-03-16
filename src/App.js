@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Navbar from "./components/Navbar";
-import Jumbotron from './components/Jumbotron';
+import Landing from './pages/Landing';
 import Portfolio from "./pages/Portfolio";
 import About from './pages/About';
 import Contact from './pages/Contact';
@@ -17,7 +17,7 @@ function App() {
       <div>
         <Navbar />
         <Switch>
-          <Route exact path={"/"} component={Jumbotron} />
+          <Route exact path={"/"} component={Landing} />
           <Route exact path={"/portfolio"} component={Portfolio} />
           <Route exact path={"/about"} component={About} />
           <Route exact path={"/contact"} component={Contact} />

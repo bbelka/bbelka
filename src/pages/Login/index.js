@@ -1,7 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Button, Card, Container, Row } from 'react-bootstrap';
+import { useHistory } from "react-router-dom";
+import API from '../../utils/API';
 
 function Login() {
+
+    const history = useHistory();
+    const [values, setValues] = useState({
+        username: "",
+        password: ""
+    })
+
+    const handleChange = (event) => {
+        setValues({ ...values, [event.target.name]: event.target.value });
+        console.log(values);
+    }
+
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const user = {
+            username: values.username,
+            password: values.password
+        }
+
+        API.login(user)
+            .then(({ data }) => {
+                if (data) {
+                    history.push('/add')
+                }
+            })
+    }
 
     return (
         <Container>
@@ -10,16 +39,16 @@ function Login() {
                     <Card
                         bg="dark"
                         text="white">
-                        <Form>
+                        <Form onSubmit={handleSubmit}>
                             <Form.Group controlId="formUsername">
                                 <Form.Label>Username</Form.Label>
-                                <Form.Control type="email" placeholder="Enter username" />
+                                <Form.Control name="username" type="username" placeholder="Enter username" onChange={handleChange} />
 
                             </Form.Group>
 
                             <Form.Group controlId="formPassword">
                                 <Form.Label>Password</Form.Label>
-                                <Form.Control type="password" placeholder="Enter password" />
+                                <Form.Control name="password" type="password" placeholder="Enter password" onChange={handleChange} />
                             </Form.Group>
 
                             <Button variant="primary" type="submit">
