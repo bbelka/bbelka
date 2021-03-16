@@ -1,6 +1,6 @@
 import axios from 'axios';
-const BASE_URL = 'http://localhost:8080'
-// const BASE_URL = 'https://bbelka-srvr.herokuapp.com'
+// const BASE_URL = 'http://localhost:8080'
+const BASE_URL = 'https://bbelka-srvr.herokuapp.com'
 
 
 export default {
@@ -26,7 +26,6 @@ export default {
         return axios.get(BASE_URL + "/auth/logout", { withCredentials: true })
     },
     readSessions: function () {
-        // return axios.get(BASE_URL + "/readsessions", { withCredentials: true })
         return axios.get(BASE_URL + "/readsessions", { withCredentials: true })
     }
 }
