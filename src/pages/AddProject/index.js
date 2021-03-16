@@ -55,24 +55,24 @@ function AddProject() {
         }
     }
 
-    useEffect(() => {
-        async function init() {
-            try {
-                const { data: user } = await API.readSessions();
-                if (user) {
-                    console.log(user);
-                    setLoggedIn(true)
-                } else {
-                    console.log("no user");
-                    history.push("/login");
-                }
-            } catch (err) {
-                console.log(err);
-                throw err;
-            }
-        }
-        init();
-    })
+    // useEffect(() => {
+    //     async function init() {
+    //         try {
+    //             const { data: user } = await API.readSessions();
+    //             if (user) {
+    //                 console.log(user);
+    //                 setLoggedIn(true)
+    //             } else {
+    //                 console.log("no user");
+    //                 history.push("/login");
+    //             }
+    //         } catch (err) {
+    //             console.log(err);
+    //             throw err;
+    //         }
+    //     }
+    //     init();
+    // })
 
 
     const uploadIMG = async () => {
