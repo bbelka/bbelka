@@ -5,8 +5,6 @@ import API from "../../utils/API";
 import Login from "../Login";
 
 
-
-
 function AddProject() {
 
     const history = useHistory();
@@ -21,7 +19,6 @@ function AddProject() {
     const [server, setServer] = useState({});
     const [imgPath, setImgPath] = useState({});
     const [loggedIn, setLoggedIn] = useState(false);
-
 
 
     const handleInputChange = e => {
@@ -41,9 +38,6 @@ function AddProject() {
         else if (name === "technologies") {
             setTechnologies(value);
         }
-        // else if (name === "mainImage") {
-        //     setMainImage(value);
-        // }
         else if (name === "deployed") {
             setDeployed(value);
         }
@@ -52,37 +46,46 @@ function AddProject() {
         }
         else if (name === "server") {
             setServer(value);
-        }
-    }
+        };
+    };
 
+    //if there's no user logged in, render render the redirect to login
     useEffect(() => {
+
         async function init() {
             try {
+                //read sessions
                 const user = await API.readSessions();
+
+                //if there's a session for user, set loggedIn state to true
                 if (user) {
-                    console.log(user);
                     setLoggedIn(true)
+
+                //else redirect to login
                 } else {
                     console.log("no user");
                     history.push("/login");
                 }
+
             } catch (err) {
                 console.log(err);
                 throw err;
             }
         }
         init();
-    })
+    });
 
-
+    //Cloudinary image uploader
     const uploadIMG = async () => {
-        console.log(imgPath)
+
         // make object
         if (!isEmpty(imgPath)) {
             const data = new FormData();
-            data.append("file", imgPath);         // GET Value from state >> upload
+            data.append("file", imgPath);
 
+            // GET Value from state >> upload
             data.append("upload_preset", "rncfuvsl");
+
             // upload file
             const res = await fetch(
                 "https://api.cloudinary.com/v1_1/bbelka/image/upload",
@@ -91,26 +94,34 @@ function AddProject() {
                     body: data,
                 }
             );
-            const file = await res.json();           // URL Link to picture
-            // setMainImage(file.url);
+            const file = await res.json();
+
+            // URL Link to picture
             return file.url
-        }
-    }
+        };
+    };
 
     const selectFile = (e) => {
         let file = e.target.files[0];
-        setImgPath(file);       // Set file to state
-    }
+        // Set file to state
+        setImgPath(file);
+    };
 
     function isEmpty(obj) {
         for (var x in obj) { return false; }
         return true;
-    }
+    };
 
     const handleSubmit = async (event) => {
         event.persist();
         event.preventDefault();
-        const image = await uploadIMG()
+
+
+
+        //await image upload to return url for picture
+        const image = await uploadIMG();
+
+        //build project object
         const newProject = {
             name: name,
             description: description,
@@ -118,8 +129,9 @@ function AddProject() {
             contribution: contribution,
             technologies: technologies,
             mainImage: image
-        }
+        };
 
+        //build Url array
         const Urls = []
         if (deployed) {
             Urls.push({ name: "deployed", url: deployed })
@@ -127,25 +139,23 @@ function AddProject() {
             Urls.push({ name: "github", url: github })
         } if (server) {
             Urls.push({ name: "server", url: server })
-        }
+        };
 
-        API.createProject(newProject)
-            .then(({ data }) => {
-                console.log("create")
-                console.log(data);
-                Urls.map((url) => {
-                    const newUrl = {
-                        projectId: data._id,
-                        name: url.name,
-                        url: url.url
-                    }
-                    return API.createUrl(newUrl)
-                })
-            })
-            .catch(err => console.log(err))
+        //create dbProject
+        const dbProject = await API.createProject(newProject);
 
+        //create dbUrls associated with project
+        Urls.map((url) => {
+            return API.createUrl(
+                {
+                    projectId: dbProject.data._id,
+                    name: url.name,
+                    url: url.url
+                }
+            );
+        });
+    };
 
-    }
     const renderAddProject = () => {
         return (
             <Container>
@@ -221,8 +231,8 @@ function AddProject() {
             </Container>
         )
     }
-    return <div className="Dashboard">{loggedIn ? renderAddProject() : <Login />}</div>
 
-}
+    return <div className="Dashboard">{loggedIn ? renderAddProject() : <Login />}</div>
+};
 
 export default AddProject;

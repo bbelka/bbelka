@@ -7,7 +7,8 @@ function ProjectCard(props) {
             <Card
                 bg="dark"
                 text="white"
-                variant="portfolio">
+                variant="portfolio"
+                id="portfolio">
                 <Card.Img variant="top" src={props.project.mainImage} />
                 <Card.Body>
                     <Card.Title>{props.project.name}</Card.Title>

@@ -25,7 +25,7 @@ function ContactForm(props) {
                     <Col md={12}>
                         <Form.Group controlId="emailInput">
                             <Form.Label>Last Name</Form.Label>
-                            <Form.Control type="email" placeholder="user@email.com" nChange={props.handleInputChange} />
+                            <Form.Control type="email" placeholder="user@email.com" onChange={props.handleInputChange} />
                         </Form.Group>
                     </Col>
                 </Row>
