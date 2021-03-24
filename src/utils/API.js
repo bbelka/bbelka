@@ -19,16 +19,25 @@ export default {
     createUrl: (url) => {
         return axios.post(BASE_URL + "/api/url", url)
     },
-    login: (userData) => {
-        return axios.post(BASE_URL + "/auth/login", userData, { withCredentials: true })
-    },
     logout: () => {
-        return axios.get(BASE_URL + "/auth/logout", { withCredentials: true })
+        return axios.get(BASE_URL + "/auth/logout")
     },
-    readSessions: function () {
-        return axios.get(BASE_URL + "/readsessions", { withCredentials: true })
+    readSessions: () => {
+        return axios.get(BASE_URL + "/readsessions")
     },
     createUser: (userData) => {
-        return axios.post(BASE_URL + "/api/user", userData, { withCredentials: true })
+        return axios.post(BASE_URL + "/api/user", userData)
+    },
+    authenticated: () => {
+        return axios.post(BASE_URL + "/auth/authenticated")
+    },
+    login: (userData) => {
+        return axios.post(BASE_URL + "/auth/login", userData)
+    },
+    setHeader: (name, value) => {
+        if (value)
+            axios.defaults.headers.common[name] = value;
+        else
+            delete axios.defaults.headers.common[name];
     }
 };
