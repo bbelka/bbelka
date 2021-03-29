@@ -25,14 +25,14 @@ export default {
     readSessions: () => {
         return axios.get(BASE_URL + "/readsessions")
     },
-    createUser: (userData) => {
-        return axios.post(BASE_URL + "/api/user", userData)
+    register: (userData) => {
+        return axios.post(BASE_URL + "/auth/jwt/register", userData)
     },
     authenticated: () => {
-        return axios.post(BASE_URL + "/auth/authenticated")
+        return axios.post(BASE_URL + "/auth/jwt/authenticated")
     },
     login: (userData) => {
-        return axios.post(BASE_URL + "/auth/login", userData)
+        return axios.post(BASE_URL + "/auth/jwt/login", userData)
     },
     setHeader: (name, value) => {
         if (value)

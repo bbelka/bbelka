@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Form, Button, Card, Container, Row } from 'react-bootstrap';
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import API from '../../utils/API';
+
 
 function Login() {
 
-    const history = useHistory();
+    // const history = useHistory();
     const [values, setValues] = useState({
         username: "",
         password: ""
@@ -23,11 +24,12 @@ function Login() {
             password: values.password
         }
 
-        API.createUser(user)
+        API.register(user)
             .then(({ data }) => {
-                if (data) {
-                    history.push('/')
-                }
+                // if (data) {
+                //     history.push('/')
+                // }
+                console.log(data);
             })
     }
 

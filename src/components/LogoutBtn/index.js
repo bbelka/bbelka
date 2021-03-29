@@ -1,15 +1,18 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import API from '../../utils/API';
+// import API from '../../utils/API';
+import { useLogout } from '../../utils/auth'
 
 function LogoutBtn() {
 
-    const handleClick = () => {
-        API.logout();
-    }
+    // const handleClick = (e) => {
+    //     // API.logout();
+    //     e.preventDefault()
+    //     useLogout;
+    // }
 
     return (
-        <Button onClick={handleClick}>Logout</Button>
+        <Button onClick={useLogout}>Logout</Button>
     )
 }
 

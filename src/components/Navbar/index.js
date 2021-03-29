@@ -1,5 +1,6 @@
 import React from "react";
 import "./index.css"
+import LogoutBtn from '../LogoutBtn/index';
 
 function Navbar() {
     return (
@@ -10,6 +11,7 @@ function Navbar() {
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
+                <LogoutBtn />
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
                         <li className="nav-item">
