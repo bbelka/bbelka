@@ -3,7 +3,7 @@ const BASE_URL = 'http://localhost:8080'
 // const BASE_URL = 'https://bbelka-srvr.herokuapp.com'
 
 
-export default {
+const API = {
     mail: (email) => {
         return axios.post(BASE_URL + "/mail/send", email)
     },
@@ -41,3 +41,5 @@ export default {
             delete axios.defaults.headers.common[name];
     }
 };
+
+export default API;
